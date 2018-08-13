@@ -1,0 +1,8 @@
+website([
+  website: 'peerpad.net',
+  build_directory: 'build/',
+  record: [
+    'production': '_dnslink',
+    'master': '_dnslink.dev',
+  ]
+])
