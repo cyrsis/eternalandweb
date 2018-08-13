@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import web3 from './web3'
 import ipfs from './ipfs'
 import storehash from './storehash'
+import QRCode from 'qrcode.react'
 
 class App extends Component {
   state = {
@@ -36,7 +37,6 @@ class App extends Component {
     try {
       this.setState({blockNumber: 'waiting..'})
       this.setState({gasUsed: 'waiting...'})
-
       // get Transaction Receipt in console on click
       // See: https://web3js.readthedocs.io/en/1.0/web3-eth.html#gettransactionreceipt
       await web3.eth.getTransactionReceipt(this.state.transactionHash, (err, txReceipt) => {
@@ -45,7 +45,8 @@ class App extends Component {
       }) // await for getTransactionReceipt
 
       await this.setState({blockNumber: this.state.txReceipt.blockNumber})
-      await this.setState({gasUsed: this.state.txReceipt.gasUsed})} // try
+      await this.setState({gasUsed: this.state.txReceipt.gasUsed})
+    } // try
     catch (error) {
       console.log(error)
     } // catch
@@ -87,11 +88,8 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <h1> Ethereum and InterPlanetary File System(IPFS) with Create React App</h1>
+          <h1> Ethereum with IPFS rom infura with Create React App</h1>
         </header>
-
-        <hr/>
-
         <grid>
           <h3> Choose file to send to IPFS </h3>
           <form onSubmit={this.onSubmit}>
@@ -108,7 +106,7 @@ class App extends Component {
           <hr/>
           <button onClick={this.onClick}> Get Transaction Receipt</button>
 
-          <table bordered responsive>
+          <table>
             <thead>
             <tr>
               <th>Tx Receipt Category</th>
@@ -143,6 +141,10 @@ class App extends Component {
             </tbody>
           </table>
         </grid>
+        <div>
+          <QRCode value={'https://gateway.ipfs.io/ipfs/' + this.state.ipfsHash}/>
+          {console.log(this.state.ipfsHash)}
+        </div>
       </div>
     )
   } // render
