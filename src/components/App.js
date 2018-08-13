@@ -88,7 +88,7 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <h1> Ethereum with IPFS rom infura with Create React App</h1>
+          <h1> Ethereum with IPFS in infura with Create React App</h1>
         </header>
         <grid>
           <h3> Choose file to send to IPFS </h3>
